@@ -14,8 +14,9 @@ class Shop {
   updateQuality() {
     this.items.forEach(item => {
       if (item.name === 'Sulfuras, Hand of Ragnaros') return;
-
-      item.sellIn--;
+      
+      // Diminution de sellIn de 1
+      item.sellIn--; 
 
       switch (item.name) {
         case 'Aged Brie':
@@ -25,7 +26,7 @@ class Shop {
           this.updateBackstagePasses(item);
           break;
         default:
-          this.updateNormalItem(item);
+          this.updateNormalItem(item); 
           break;
       }
 
@@ -38,18 +39,24 @@ class Shop {
   }
 
   updateAgedBrie(item) {
-    if (item.quality < 50) item.quality++;
+    // Augmentation de quality de 1
+    if (item.quality < 50) item.quality++; 
   }
 
   updateBackstagePasses(item) {
-    if (item.quality < 50) item.quality++;
-    if (item.sellIn < 10 && item.quality < 50) item.quality++;
-    if (item.sellIn < 5 && item.quality < 50) item.quality++;
+    // Augmentation de quality de 1
+    if (item.quality < 50) item.quality++; 
+    // Augmentation supplémentaire de 1 si sellIn < 10
+    if (item.sellIn < 10 && item.quality < 50) item.quality++; 
+    // Augmentation supplémentaire de 1 si sellIn < 5
+    if (item.sellIn < 5 && item.quality < 50) item.quality++; 
   }
 
   updateNormalItem(item) {
-    if (item.quality > 0) item.quality--;
-    if (item.name.startsWith('Conjured') && item.quality > 0) item.quality--;
+    // Diminution de quality de 1
+    if (item.quality > 0) item.quality--; 
+    // Diminution supplémentaire pour les articles "Conjured"
+    if (item.name.startsWith('Conjured') && item.quality > 0) item.quality--; 
   }
 
   handleExpiredItem(item) {
